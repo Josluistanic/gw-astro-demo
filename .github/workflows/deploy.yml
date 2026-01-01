@@ -26,7 +26,7 @@ jobs:
         run: npm run build # Compila el sitio con Astro
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5 # Acción para implementar el sitio en un servidor FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5 # Acción para implementar el sitio en un servidor FTP
         with:
           server: ${{ secrets.FTP_SERVER}}
           username: ${{ secrets.FTP_USERNAME }}
