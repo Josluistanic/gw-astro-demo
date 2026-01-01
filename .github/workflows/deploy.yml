@@ -1,0 +1,37 @@
+name: Deploy to CPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Entorno ejecutor
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Acción para clonar el repositorio
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # Acción para instalar Node.js
+        with:
+          node-version: "20"
+          cache: "npm" # Almacenamiento en caché de dependencias para acelerar la compilación
+
+      - name: Install dependencies
+        run: npm ci # Instala las dependencias exactamente como se especifica en el archivo package-lock.json (Instalación limpia/clean install)
+
+      - name: Build Astro site
+        run: npm run build # Compila el sitio con Astro
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5 # Acción para implementar el sitio en un servidor FTP
+        with:
+          server: ${{ secrets.FTP_SERVER}}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          protocol: ftps
+          security: loose
