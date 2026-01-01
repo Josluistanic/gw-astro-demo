@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+_site/
+
+# Astro-specific directories
+.astro/
+
+# Environment variables
+.env
+.env.production
+.env.development
+
+# IDE/Editor files
+.DS_Store
+.vscode/ # ignore editor settings or extensions you don't want to share
+.idea/ # exclude IntelliJ/WebStorm stuff
+*.code-workspace
+
+# Logs and miscellaneous
+*.log
+test-results/
+.eslintcache
+
+# Netlify/Vercel specific
+.vercel/
+.netlify/
